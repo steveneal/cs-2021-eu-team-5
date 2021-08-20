@@ -18,7 +18,10 @@ public class Rfq implements Serializable {
 
     public static Rfq fromJson(String json) {
         //TODO: build a new RFQ setting all fields from data passed in the RFQ json message
-        return null;
+        //return null;
+        Rfq rfq = new Gson().fromJson(json, Rfq.class);
+
+        return rfq;
     }
 
     @Override

@@ -25,7 +25,7 @@ public class TradeDataLoader {
         Dataset<Row> trades = null;
 
         //TODO: log a message indicating number of records loaded and the schema used
-
+        log.info(String.format("Number of records loaded:%n%s", Long.toString(trades.count())));
         return trades;
     }
 
