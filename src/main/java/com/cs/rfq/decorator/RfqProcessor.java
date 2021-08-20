@@ -50,11 +50,14 @@ public class RfqProcessor {
         JavaDStream<String> lines = streamingContext.socketTextStream("localhost", 9000);
         //TODO: convert each incoming line to a Rfq object and call processRfq method with it
 
-        JavaDStream<String> rfqJson = lines.flatMap(x -> Arrays.asList(x.split("\"")).iterator());
-        rfqJson.foreachRDD(rdd -> {
+        lines.foreachRDD(rdd -> {
+            rdd.collect().forEach(line -> convertRfq(line));
+        }); //flatMap(x -> Arrays.asList(x.split("\"")).iterator());
+        /*
+            rfqJson.foreachRDD(rdd -> {
             rdd.collect().forEach(line -> convertRfq(line));
         });
-
+*/
 /*
         //test
         JavaDStream<String> rfqJson = lines.flatMap(x -> Arrays.asList(x.split(" ")).iterator());
@@ -69,9 +72,8 @@ public class RfqProcessor {
     }
 
     public void convertRfq(String line){
-        Rfq rfq = new Rfq();
-        rfq.fromJson(line);
-        //System.out.println(rfq.toString());
+        Rfq rfq = Rfq.fromJson(line);
+        System.out.println(rfq.toString());
         processRfq(rfq);
     }
     public void processRfq(Rfq rfq) {
