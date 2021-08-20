@@ -72,12 +72,12 @@ public class RfqProcessor {
     }
 
     public void convertRfq(String line){
-<<<<<<< Updated upstream
+
         Rfq rfq = Rfq.fromJson(line);
-=======
-        Rfq rfq = new Rfq();
+
+//        Rfq rfq = new Rfq();
         rfq.fromJson(line);
->>>>>>> Stashed changes
+
         System.out.println(rfq.toString());
         processRfq(rfq);
     }
