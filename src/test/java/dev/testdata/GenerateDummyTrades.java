@@ -68,7 +68,7 @@ public class GenerateDummyTrades {
         trades.forEach(out::println);
         out.flush();
         out.close();
-
+        System.out.println(trades.get(0));
         System.out.println("Generated: " + trades.size() + " records");
     }
 
